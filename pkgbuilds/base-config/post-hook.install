@@ -1,0 +1,19 @@
+post_install() {
+    echo installed
+
+      # update server list with reflector to ensure fastest mirrors as backup
+  reflector --latest --fastest 6 -c US >> $pkgdir/etc/pacman.d/mirrorlist
+  install -D -m644 sshd_config $pkgdir/etc/ssh/sshd_config
+
+  # override pacman settings with personal defaults
+  install -D -m644 pacman.conf $pkgdir/etc/pacman.conf
+
+}
+
+post_upgrade() {
+
+}
+
+post_remove() {
+    echo removed
+}
